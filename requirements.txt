@@ -1,0 +1,10 @@
+streamlit
+google-api-python-client
+pandas
+numpy
+matplotlib
+seaborn
+prophet
+nltk
+sqlalchemy
+python-dotenv
