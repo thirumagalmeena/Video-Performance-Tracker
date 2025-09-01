@@ -110,6 +110,27 @@ def save_comments_to_db(comments):
     conn.commit()
     conn.close()
 
+def save_snapshot(video_data):
+    """Save daily snapshot of views/likes/comments."""
+    conn = get_connection()
+    cursor = conn.cursor()
+    today = datetime.date.today().isoformat()
+
+    cursor.execute("""
+    INSERT OR REPLACE INTO video_snapshots (video_id, snapshot_date, views, likes, comments)
+    VALUES (?, ?, ?, ?, ?)
+    """, (
+        video_data["video_id"],
+        today,
+        video_data["views"],
+        video_data["likes"],
+        video_data["comments"]
+    ))
+    conn.commit()
+    conn.close()
+    print(f"Snapshot saved for {video_data['video_id']} on {today}")
+
+"""
 if __name__ == "__main__":
     video_id = "dQw4w9WgXcQ"  # Example video
     create_tables()
@@ -120,3 +141,4 @@ if __name__ == "__main__":
     comments = fetch_comments(video_id)
     save_comments_to_db(comments)
     print(f"Saved {len(comments)} comments with sentiment into DB!")
+"""    

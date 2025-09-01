@@ -33,6 +33,18 @@ def create_tables():
     )
     """)
 
+
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS video_snapshots (
+        video_id TEXT,
+        snapshot_date TEXT,
+        views INTEGER,
+        likes INTEGER,
+        comments INTEGER,
+        PRIMARY KEY(video_id, snapshot_date),
+        FOREIGN KEY(video_id) REFERENCES videos(video_id)
+    )
+    """)
     conn.commit()
     conn.close()
 
