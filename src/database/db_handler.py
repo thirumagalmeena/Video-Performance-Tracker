@@ -45,6 +45,17 @@ def create_tables():
         FOREIGN KEY(video_id) REFERENCES videos(video_id)
     )
     """)
+
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS channels (
+        channel_id TEXT PRIMARY KEY,
+        title TEXT,
+        description TEXT,
+        subscribers INTEGER,
+        total_views INTEGER,
+        video_count INTEGER
+    )
+    """)
     conn.commit()
     conn.close()
 
